@@ -38,7 +38,7 @@ class Category(models.Model):
 class Collection(models.Model):
     author_user = models.ForeignKey(User,on_delete=models.CASCADE)
     series_name = models.TextField()
-    category = models.ManyToManyField(Category)
+    category = models.ManyToManyField(Category,related_name="category")
     updated = models.DateTimeField(
         auto_now=True,
         null=True,

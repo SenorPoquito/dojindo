@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dojindo_backend',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [
