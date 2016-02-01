@@ -5,6 +5,7 @@ from dojindo_backend.models import Collection
 from dojindo_backend.models import Follow
 from dojindo_backend.models import Volume
 from dojindo_backend.models import Purchase
+from dojindo_backend.models import Category
 
 from dojindo_backend.serializers import UserSerializer
 from dojindo_backend.serializers import UserSerializerFull
@@ -12,6 +13,7 @@ from dojindo_backend.serializers import CollectionSerializer
 from dojindo_backend.serializers import VolumeSerializer
 from dojindo_backend.serializers import FollowSerializer
 from dojindo_backend.serializers import PurchaseSerializer
+from dojindo_backend.serializers import CategorySerializer
 
 from django.http import Http404
 from rest_framework.views import APIView
@@ -41,3 +43,7 @@ class FollowViewSet(viewsets.ModelViewSet):
 class PurchaseViewSet(viewsets.ModelViewSet):
     queryset = Purchase.objects.all()
     serializer_class = PurchaseSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer

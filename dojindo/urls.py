@@ -23,6 +23,7 @@ from dojindo_backend.views import CollectionViewSet
 from dojindo_backend.views import VolumeViewSet
 from dojindo_backend.views import FollowViewSet
 from dojindo_backend.views import PurchaseViewSet
+from dojindo_backend.views import CategoryViewSet
 
 from rest_framework import routers
 
@@ -33,7 +34,7 @@ router.register(r'collections',CollectionViewSet)
 router.register(r'volumes',VolumeViewSet)
 router.register(r'follows',FollowViewSet)
 router.register(r'purchases',PurchaseViewSet)
-
+router.register(r'categories',CategoryViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

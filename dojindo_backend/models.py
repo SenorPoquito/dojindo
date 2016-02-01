@@ -20,6 +20,9 @@ class User(models.Model):
     def __str__(self):
         return self.user_name
 
+    def __unicode__(self):
+        return self.user_name
+
 
 class Category(models.Model):
     name = models.CharField(
@@ -37,7 +40,11 @@ class Category(models.Model):
         return self.name
 
 class Collection(models.Model):
-    author_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    author_user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        to_field = 'user_name'
+    )
     series_name = models.TextField()
     category = models.ManyToManyField(Category,related_name="category")
     updated = models.DateTimeField(
@@ -49,12 +56,13 @@ class Collection(models.Model):
         auto_now_add=True,
     )
     def __str__(self):
-        return self.series_name + " by " + self.author_user.user_name
+        # return self.series_name + " by " + self.author_user.user_name
+        return self.series_name
 
 class Volume(models.Model):
     volume_name = models.TextField()
     volume_number = models.IntegerField();
-    parent_series = models.ForeignKey(Collection,on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection,on_delete=models.CASCADE)
     updated = models.DateTimeField(
         auto_now=True,
         null=True,
@@ -64,7 +72,9 @@ class Volume(models.Model):
         auto_now_add=True,
     )
     def __str__(self):
-        return self.volume_name + " | " + self.parent_series.series_name
+        return self.volume_name + " | " + self.collection.series_name
+    def __unicode__(self):
+        return self.volume_name + " | " + self.collection.series_name
 
 class Purchase(models.Model):
     purchased_volume = models.ForeignKey(Volume,models.DO_NOTHING)
