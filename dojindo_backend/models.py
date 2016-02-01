@@ -6,6 +6,7 @@ from django.utils import timezone
 class User(models.Model):
     user_name = models.CharField(
         max_length=255,
+        primary_key=True,
     )
     email = models.EmailField()
     updated = models.DateTimeField(

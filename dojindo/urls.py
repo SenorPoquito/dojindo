@@ -16,11 +16,28 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls import include
 from rest_framework.urlpatterns import format_suffix_patterns
-from dojindo_backend import views
+from dojindo_backend.views import UserViewSet
+from dojindo_backend.views import CollectionViewSet
+from dojindo_backend.views import VolumeViewSet
+from dojindo_backend.views import FollowViewSet
+from dojindo_backend.views import PurchaseViewSet
+
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+
+router.register(r'users',UserViewSet)
+router.register(r'collections',CollectionViewSet)
+router.register(r'volumes',VolumeViewSet)
+router.register(r'follows',FollowViewSet)
+router.register(r'purchases',PurchaseViewSet)
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-     url(r'^api/v1/users/$', views.UserList.as_view()),
-    url(r'^api/v1/users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+    # url(r'^api/v1/users/(?P<user_name>[0-9]+)/$', views.UserDetail.as_view())
+    url(r'^api/v1/', include(router.urls)),
 ]
+# urlpatterns += router.urls
