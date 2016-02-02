@@ -47,6 +47,7 @@ class FollowSerializer(serializers.ModelSerializer):
         fields = ('id','follower_user','following_user')
 
 class PurchaseSerializer(serializers.ModelSerializer):
+    purchased_volume = VolumeSerializer()
     class Meta:
         model = Purchase
         fields = ('id','purchased_volume','purchase_user')
