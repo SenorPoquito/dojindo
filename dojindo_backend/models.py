@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
+from django.utils.encoding import smart_unicode, smart_unicode
 # Create your models here.
 
 class User(models.Model):
@@ -17,11 +18,11 @@ class User(models.Model):
         null=True,
         auto_now_add=True,
     )
-    def __str__(self):
-        return self.name
+    def __unicode__(self):
+        return smart_unicode(self.name)
 
     def __unicode__(self):
-        return self.name
+        return smart_unicode(self.name)
 
 class ReferenceWork(models.Model):
     name = models.CharField(
@@ -36,8 +37,8 @@ class ReferenceWork(models.Model):
         null=True,
         auto_now_add=True,
     )
-    def __str__(self):
-        return self.name
+    def __unicode__(self):
+        return smart_unicode(self.name)
 class Category(models.Model):
     name = models.CharField(
         max_length=255,
@@ -50,7 +51,7 @@ class Category(models.Model):
         null=True,
         auto_now_add=True,
     )
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 class Collection(models.Model):
@@ -76,7 +77,7 @@ class Collection(models.Model):
         null=True,
         auto_now_add=True,
     )
-    def __str__(self):
+    def __unicode__(self):
         # return self.series_name + " by " + self.author_user.name
         return self.name
 
@@ -99,7 +100,7 @@ class Volume(models.Model):
         null=True,
         auto_now_add=True,
     )
-    def __str__(self):
+    def __unicode__(self):
         return self.name + " | " + self.collection.name
     def __unicode__(self):
         return self.name + " | " + self.collection.name
@@ -115,7 +116,7 @@ class Purchase(models.Model):
         null=True,
         auto_now_add=True,
     )
-    def __str__(self):
+    def __unicode__(self):
         return self.purchased_volume.name + " purchased by " + self.purchase_user.name
 
 class Favourite(models.Model):
@@ -129,7 +130,7 @@ class Favourite(models.Model):
         null=True,
         auto_now_add=True,
     )
-    def __str__(self):
+    def __unicode__(self):
         return self.series.name + " favourited by " + self.user.name
 
 class Follow(models.Model):
@@ -151,5 +152,5 @@ class Follow(models.Model):
         null=True,
         auto_now_add=True,
     )
-    def __str__(self):
+    def __unicode__(self):
         return self.follower_user.name + " is following " + self.following_user.name
