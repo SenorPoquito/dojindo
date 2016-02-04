@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('user_name','email')
+        fields = ('name','email')
 
 class UserSerializerFull(serializers.ModelSerializer):
     """
@@ -36,7 +36,7 @@ class UserSerializerFull(serializers.ModelSerializer):
     collection_set = CollectionSerializer(many=True,read_only=True)
     class Meta:
         model = User
-        fields = ('user_name','email','collection_set')
+        fields = ('name','email','collection_set')
 
 class FollowSerializer(serializers.ModelSerializer):
     follower_user = serializers.StringRelatedField(read_only=True)
