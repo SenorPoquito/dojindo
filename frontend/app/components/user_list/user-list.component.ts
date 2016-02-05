@@ -13,13 +13,29 @@ import {UserService} from '../../services/user.service'
     <p>Email: {{user.email}}</p>
     <p>Last Login : {{user.updated}}</p>
     <p>Created : {{user.created}}</p>
+    <h3 *ngIf="user.collection_set.length>0">Series</h3>
+    <ul>
+      <li *ngFor='#collection of user.collection_set'>
+      <div>
+      <h4>{{collection.name}}</h4>
+      <ul>
+        <li  *ngFor='#volume of collection.volume_set'>
+          <p>{{volume.name}}</p>
+          <pre>{{volume.description}}</pre>
+        </li>
+      </ul>
+      </div>
+      </li>
+    </ul>
     </li>
   </ul>
   </div>
   `,
   providers:[UserService],
+  inputs:['user'],
   outputs:['updateUser: userChange']
 })
+
 export class UserListComponent{
   private updateUser:EventEmitter<User> = new EventEmitter();
   constructor(private _userService:UserService){}

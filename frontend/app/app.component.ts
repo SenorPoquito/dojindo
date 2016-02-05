@@ -3,6 +3,7 @@ import {OnInit} from 'angular2/core';
 import {User} from './interfaces/user';
 import {UserService} from './services/user.service'
 import {UserListComponent} from './components/user_list/user-list.component'
+// import {VolumeCreateComponent} from './components/volume_create_form/volume-create.component'
 
 @Component({
   selector:'my-app',
@@ -13,6 +14,8 @@ import {UserListComponent} from './components/user_list/user-list.component'
   <button (click)="onSelect('create-collection')">Create Collection</button>
 
   <user-list *ngIf="selectedView=='user-list'" [(user)]="selectedUser"></user-list>
+  <volume-create-form *ngIf="selectedView=='create-collection'" ></volume-create-form>
+
 
   `,
   providers:[UserService],

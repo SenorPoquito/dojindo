@@ -1,8 +1,13 @@
 export interface Volume{
   id:number;
   name:string;
+  number:number;
   description:string;
-  zipPath:string;
   cost:number;
-  samplePages:number;
+  samplePage:number;
+  collection:number;
+  cover_art:string;
+  zip_file:string;
+  updated:Date;
+  created:Date;
 }

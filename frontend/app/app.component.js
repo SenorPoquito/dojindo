@@ -23,6 +23,7 @@ System.register(['angular2/core', './services/user.service', './components/user_
                 user_list_component_1 = user_list_component_1_1;
             }],
         execute: function() {
+            // import {VolumeCreateComponent} from './components/volume_create_form/volume-create.component'
             AppComponent = (function () {
                 function AppComponent() {
                     this.title = 'Dojo';
@@ -37,7 +38,7 @@ System.register(['angular2/core', './services/user.service', './components/user_
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <h1>{{title}}</h1>\n  <h2 *ngIf=\"selectedUser\">Current User : {{selectedUser.name}}</h2>\n  <button (click)=\"onSelect('user-list')\">User List</button>\n  <button (click)=\"onSelect('create-collection')\">Create Collection</button>\n\n  <user-list *ngIf=\"selectedView=='user-list'\" [(user)]=\"selectedUser\"></user-list>\n\n  ",
+                        template: "\n  <h1>{{title}}</h1>\n  <h2 *ngIf=\"selectedUser\">Current User : {{selectedUser.name}}</h2>\n  <button (click)=\"onSelect('user-list')\">User List</button>\n  <button (click)=\"onSelect('create-collection')\">Create Collection</button>\n\n  <user-list *ngIf=\"selectedView=='user-list'\" [(user)]=\"selectedUser\"></user-list>\n  <volume-create-form *ngIf=\"selectedView=='create-collection'\" ></volume-create-form>\n\n\n  ",
                         providers: [user_service_1.UserService],
                         directives: [user_list_component_1.UserListComponent]
                     }), 

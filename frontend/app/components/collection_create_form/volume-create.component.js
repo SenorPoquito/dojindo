@@ -1,4 +1,4 @@
-System.register(['angular2/core', './../../services/user.service'], function(exports_1) {
+System.register(['angular2/core'], function(exports_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9,33 +9,26 @@ System.register(['angular2/core', './../../services/user.service'], function(exp
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, user_service_1;
+    var core_1;
     var VolumeCreateComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (user_service_1_1) {
-                user_service_1 = user_service_1_1;
             }],
         execute: function() {
+            // import {UserService} from './../../services/user.service';
             VolumeCreateComponent = (function () {
-                function VolumeCreateComponent(_userService) {
-                    this._userService = _userService;
+                function VolumeCreateComponent() {
                 }
-                VolumeCreateComponent.prototype.ngOnInit = function () { this.getUsers(); };
-                VolumeCreateComponent.prototype.getUsers = function () {
-                    var _this = this;
-                    this._userService.getUsers().subscribe(function (users) { return _this.users = users; }, function (error) { return _this.errorMessage = error; });
-                };
+                // constructor (private _userService:UserService){}
+                VolumeCreateComponent.prototype.ngOnInit = function () { };
                 VolumeCreateComponent = __decorate([
                     core_1.Component({
                         selector: 'volume-create-form',
-                        templateUrl: 'app/components/volume_create_form/volume-create.html',
-                        bindings: [user_service_1.UserService]
+                        templateUrl: 'app/components/volume_create_form/collection-create.html',
                     }), 
-                    __metadata('design:paramtypes', [user_service_1.UserService])
+                    __metadata('design:paramtypes', [])
                 ], VolumeCreateComponent);
                 return VolumeCreateComponent;
             }());
