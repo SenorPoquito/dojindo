@@ -2,38 +2,32 @@ import {Component} from 'angular2/core';
 import {OnInit} from 'angular2/core';
 import {User} from './interfaces/user';
 import {UserService} from './services/user.service'
+import {UserListComponent} from './components/user_list/user-list.component'
 
 @Component({
   selector:'my-app',
   template:`
   <h1>{{title}}</h1>
   <button (click)="onSelect('user-list')">User List</button>
-  <button>Create Collection</button>
+  <button (click)="onSelect('create-collection')">Create Collection</button>
+
+  <user-list *ngIf="selectedView=='user-list'"></user-list>
+
   `,
-  providers:[UserService]
+  providers:[UserService],
+  directives:[UserListComponent]
 })
 
 export class AppComponent implements OnInit{
-  constructor(private _userService:UserService){}
 
   public title = 'Dojo';
-  public users: User[];
-  public selectedUser : User;
+  public selectedView = "";
   ngOnInit(){
-    this.getHeroes();
-  }
-  getHeroes(){
-    // this._userService.getUsers().then(users=>this.users = users)
-    this._userService.getUsers().subscribe(
-      users => this.users = users,
-      error => console.error('Error' + error),
-      () => console.log(this.users)
-    );
-
+    console.log("App Started")
   }
 
-  onSelect(user:User){
-    this.selectedUser = user;
-    console.log(this.selectedUser);
+  onSelect(view){
+    this.selectedView = view;
+    console.log(this.selectedView)
   }
 }

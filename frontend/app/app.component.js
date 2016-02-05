@@ -1,4 +1,4 @@
-System.register(['angular2/core', './services/user.service'], function(exports_1) {
+System.register(['angular2/core', './services/user.service', './components/user_list/user-list.component'], function(exports_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9,7 +9,7 @@ System.register(['angular2/core', './services/user.service'], function(exports_1
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, user_service_1;
+    var core_1, user_service_1, user_list_component_1;
     var AppComponent;
     return {
         setters:[
@@ -18,32 +18,31 @@ System.register(['angular2/core', './services/user.service'], function(exports_1
             },
             function (user_service_1_1) {
                 user_service_1 = user_service_1_1;
+            },
+            function (user_list_component_1_1) {
+                user_list_component_1 = user_list_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_userService) {
-                    this._userService = _userService;
+                function AppComponent() {
                     this.title = 'Dojo';
+                    this.selectedView = "";
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    this.getHeroes();
+                    console.log("App Started");
                 };
-                AppComponent.prototype.getHeroes = function () {
-                    var _this = this;
-                    // this._userService.getUsers().then(users=>this.users = users)
-                    this._userService.getUsers().subscribe(function (users) { return _this.users = users; }, function (error) { return console.error('Error' + error); }, function () { return console.log(_this.users); });
-                };
-                AppComponent.prototype.onSelect = function (user) {
-                    this.selectedUser = user;
-                    console.log(this.selectedUser);
+                AppComponent.prototype.onSelect = function (view) {
+                    this.selectedView = view;
+                    console.log(this.selectedView);
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <h1>{{title}}</h1>\n  <button (click)=\"onSelect('user-list')\">User List</button>\n  <button>Create Collection</button>\n  ",
-                        providers: [user_service_1.UserService]
+                        template: "\n  <h1>{{title}}</h1>\n  <button (click)=\"onSelect('user-list')\">User List</button>\n  <button (click)=\"onSelect('create-collection')\">Create Collection</button>\n\n  <user-list *ngIf=\"selectedView=='user-list'\"></user-list>\n\n  ",
+                        providers: [user_service_1.UserService],
+                        directives: [user_list_component_1.UserListComponent]
                     }), 
-                    __metadata('design:paramtypes', [user_service_1.UserService])
+                    __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
             }());

@@ -31,7 +31,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx'], function(exports_
                     console.log('GET : ' + query);
                     return this._http
                         .get(this._baseUrl + 'users/')
-                        .map(function (res) { return res.json(); });
+                        .map(function (res) { return res.json(); }).share();
                 };
                 UserService.prototype.getUser = function (user) {
                 };

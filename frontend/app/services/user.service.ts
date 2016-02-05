@@ -13,7 +13,7 @@ export class UserService{
     console.log('GET : ' + query);
     return this._http
            .get(this._baseUrl+'users/')
-           .map(res => res.json());
+           .map(res => res.json()).share();
   }
 
   getUser(user){
