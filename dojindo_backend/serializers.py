@@ -5,12 +5,12 @@ from dojindo_backend.models import Volume
 from dojindo_backend.models import Follow
 from dojindo_backend.models import Purchase
 from dojindo_backend.models import Category
-
+from dojindo_backend.models import ReferenceWork
 
 class VolumeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Volume
-        fields = ('id','volume_name','volume_number','collection')
+        fields = ('id','name','number','description','cost','samplePage','cover_art','zip_file','collection','updated','created')
 
 class CollectionSerializer(serializers.ModelSerializer):
     #volume_set = VolumeSerializer(many=True,read_only=True)
@@ -18,7 +18,7 @@ class CollectionSerializer(serializers.ModelSerializer):
     volume_set = VolumeSerializer(many=True,read_only=True)
     class Meta:
         model = Collection
-        fields = ('id','series_name','author_user','volume_set','category')
+        fields = ('id','author','name','description','cover_art','volume_set','category','referenceWork','updated','created')
 
 class UserSerializer(serializers.ModelSerializer):
     """
@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('name','email')
+        fields = ('name','email','updated','created')
 
 class UserSerializerFull(serializers.ModelSerializer):
     """
@@ -36,23 +36,27 @@ class UserSerializerFull(serializers.ModelSerializer):
     collection_set = CollectionSerializer(many=True,read_only=True)
     class Meta:
         model = User
-        fields = ('name','email','collection_set')
+        fields = ('name','email','collection_set','updated','created')
 
 class FollowSerializer(serializers.ModelSerializer):
     follower_user = serializers.StringRelatedField(read_only=True)
     following_user = serializers.StringRelatedField(read_only=True)
-
     class Meta:
         model = Follow
-        fields = ('id','follower_user','following_user')
+        fields = ('id','follower_user','following_user','updated','created')
 
 class PurchaseSerializer(serializers.ModelSerializer):
     purchased_volume = VolumeSerializer()
     class Meta:
         model = Purchase
-        fields = ('id','purchased_volume','purchase_user')
+        fields = ('id','purchased_volume','purchase_user','updated','created')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id','name')
+        fields = ('id','name','updated','created')
+
+class ReferenceWorkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReferenceWork
+        fields = ('name','updated','created')
