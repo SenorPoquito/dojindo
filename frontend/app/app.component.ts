@@ -8,7 +8,7 @@ import {UserService} from './services/user.service'
   template:`
   <h1>{{title}}</h1>
   <ul>
-    <li *ngFor="#user of users">
+    <li *ngFor="#user of users" (click)="onSelect(user)" [class.selected]="user === selectedUser">
     <p>----{{user.name}}----</p>
     <p>Email: {{user.email}}</p>
     <p>Last Login : {{user.updated}}</p>
@@ -29,8 +29,17 @@ export class AppComponent implements OnInit{
     this.getHeroes();
   }
   getHeroes(){
-    this._userService.getUsers().then(users=>this.users = users)
+    // this._userService.getUsers().then(users=>this.users = users)
+    this._userService.getUsers().subscribe(
+      users => this.users = users,
+      error => console.error('Error' + error),
+      () => console.log(this.users)
+    );
+
   }
 
-  onSelect(user:User){this.selectedUser = user;}
+  onSelect(user:User){
+    this.selectedUser = user;
+    console.log(this.selectedUser);
+  }
 }

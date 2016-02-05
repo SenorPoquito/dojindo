@@ -30,13 +30,17 @@ System.register(['angular2/core', './services/user.service'], function(exports_1
                 };
                 AppComponent.prototype.getHeroes = function () {
                     var _this = this;
-                    this._userService.getUsers().then(function (users) { return _this.users = users; });
+                    // this._userService.getUsers().then(users=>this.users = users)
+                    this._userService.getUsers().subscribe(function (users) { return _this.users = users; }, function (error) { return console.error('Error' + error); }, function () { return console.log(_this.users); });
                 };
-                AppComponent.prototype.onSelect = function (user) { this.selectedUser = user; };
+                AppComponent.prototype.onSelect = function (user) {
+                    this.selectedUser = user;
+                    console.log(this.selectedUser);
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <h1>{{title}}</h1>\n  <ul>\n    <li *ngFor=\"#user of users\">\n    <p>----{{user.name}}----</p>\n    <p>Email: {{user.email}}</p>\n    <p>Last Login : {{user.updated}}</p>\n    <p>Created : {{user.created}}</p>\n    </li>\n  </ul>\n  ",
+                        template: "\n  <h1>{{title}}</h1>\n  <ul>\n    <li *ngFor=\"#user of users\" (click)=\"onSelect(user)\" [class.selected]=\"user === selectedUser\">\n    <p>----{{user.name}}----</p>\n    <p>Email: {{user.email}}</p>\n    <p>Last Login : {{user.updated}}</p>\n    <p>Created : {{user.created}}</p>\n    </li>\n  </ul>\n  ",
                         providers: [user_service_1.UserService]
                     }), 
                     __metadata('design:paramtypes', [user_service_1.UserService])

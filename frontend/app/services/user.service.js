@@ -1,4 +1,4 @@
-System.register(['angular2/core', './mock-user', 'rxjs/Rx'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Rx'], function(exports_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9,34 +9,35 @@ System.register(['angular2/core', './mock-user', 'rxjs/Rx'], function(exports_1)
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, mock_user_1;
+    var core_1, http_1;
     var UserService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (mock_user_1_1) {
-                mock_user_1 = mock_user_1_1;
+            function (http_1_1) {
+                http_1 = http_1_1;
             },
             function (_1) {}],
         execute: function() {
-            // import {Http, HTTP_PROVIDERS} from 'angular2/http';
-            // import { Injectable } from 'angular2/core';
             UserService = (function () {
-                function UserService() {
+                function UserService(_http) {
+                    this._http = _http;
                     this._baseUrl = "http://localhost:8000/api/v1/";
                 }
                 UserService.prototype.getUsers = function () {
-                    // return this.http.get(this._baseUrl+'/users').map(res => <User[]> res.json().data)
-                    // .catch(this.handleError);
-                    return Promise.resolve(mock_user_1.USERS);
+                    var query = this._baseUrl + 'users/';
+                    console.log('GET : ' + query);
+                    return this._http
+                        .get(this._baseUrl + 'users/')
+                        .map(function (res) { return res.json(); });
                 };
                 UserService.prototype.getUser = function (user) {
                 };
                 UserService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [http_1.Http])
                 ], UserService);
                 return UserService;
             }());
