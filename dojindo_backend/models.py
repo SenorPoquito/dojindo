@@ -91,6 +91,10 @@ class Volume(models.Model):
         max_length = 255,
         null=True,
     )
+    zip_file = models.CharField(
+        max_length = 255,
+        null=True,
+    )
     collection = models.ForeignKey(Collection,on_delete=models.CASCADE)
     updated = models.DateTimeField(
         auto_now=True,
