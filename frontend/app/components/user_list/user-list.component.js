@@ -9,12 +9,13 @@ System.register(['angular2/core', '../../services/user.service'], function(expor
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, user_service_1;
+    var core_1, core_2, user_service_1;
     var UserListComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+                core_2 = core_1_1;
             },
             function (user_service_1_1) {
                 user_service_1 = user_service_1_1;
@@ -23,6 +24,7 @@ System.register(['angular2/core', '../../services/user.service'], function(expor
             UserListComponent = (function () {
                 function UserListComponent(_userService) {
                     this._userService = _userService;
+                    this.updateUser = new core_2.EventEmitter();
                 }
                 UserListComponent.prototype.ngOnInit = function () {
                     this.getUsers();
@@ -33,14 +35,16 @@ System.register(['angular2/core', '../../services/user.service'], function(expor
                     this._userService.getUsers().subscribe(function (users) { return _this.users = users; }, function (error) { return console.error('Error' + error); }, function () { return console.log(_this.users); });
                 };
                 UserListComponent.prototype.onSelect = function (user) {
-                    this.selectedUser = user;
-                    console.log(this.selectedUser);
+                    this.user = user;
+                    this.updateUser.next(user);
+                    console.log(this.user);
                 };
                 UserListComponent = __decorate([
                     core_1.Component({
                         selector: 'user-list',
                         template: "\n  <div>\n  <ul>\n    <li *ngFor=\"#user of users\" (click)=\"onSelect(user)\" [class.selected]=\"user === selectedUser\">\n    <p>----{{user.name}}----</p>\n    <p>Email: {{user.email}}</p>\n    <p>Last Login : {{user.updated}}</p>\n    <p>Created : {{user.created}}</p>\n    </li>\n  </ul>\n  </div>\n  ",
-                        providers: [user_service_1.UserService]
+                        providers: [user_service_1.UserService],
+                        outputs: ['updateUser: userChange']
                     }), 
                     __metadata('design:paramtypes', [user_service_1.UserService])
                 ], UserListComponent);

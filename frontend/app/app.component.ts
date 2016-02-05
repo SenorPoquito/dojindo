@@ -8,10 +8,11 @@ import {UserListComponent} from './components/user_list/user-list.component'
   selector:'my-app',
   template:`
   <h1>{{title}}</h1>
+  <h2 *ngIf="selectedUser">Current User : {{selectedUser.name}}</h2>
   <button (click)="onSelect('user-list')">User List</button>
   <button (click)="onSelect('create-collection')">Create Collection</button>
 
-  <user-list *ngIf="selectedView=='user-list'"></user-list>
+  <user-list *ngIf="selectedView=='user-list'" [(user)]="selectedUser"></user-list>
 
   `,
   providers:[UserService],
@@ -19,9 +20,9 @@ import {UserListComponent} from './components/user_list/user-list.component'
 })
 
 export class AppComponent implements OnInit{
-
+  public selectedUser:User;
   public title = 'Dojo';
-  public selectedView = "";
+  public selectedView:string;
   ngOnInit(){
     console.log("App Started")
   }

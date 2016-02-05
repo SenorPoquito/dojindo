@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core';
+import {EventEmitter} from 'angular2/core';
 import {User} from '../../interfaces/user'
 import {UserService} from '../../services/user.service'
 
@@ -16,16 +17,19 @@ import {UserService} from '../../services/user.service'
   </ul>
   </div>
   `,
-  providers:[UserService]
-  // inputs:['user']
+  providers:[UserService],
+  outputs:['updateUser: userChange']
 })
 export class UserListComponent{
+  private updateUser:EventEmitter<User> = new EventEmitter();
   constructor(private _userService:UserService){}
   public users:User[];
-  public selectedUser : User;
+  // public selectedUser : User;
+  public user:User;
 
   ngOnInit(){
     this.getUsers();
+
   }
 
   getUsers(){
@@ -37,7 +41,8 @@ export class UserListComponent{
     );
   }
   onSelect(user:User){
-    this.selectedUser = user;
-    console.log(this.selectedUser);
+    this.user = user;
+    this.updateUser.next(user);
+    console.log(this.user);
   }
 }

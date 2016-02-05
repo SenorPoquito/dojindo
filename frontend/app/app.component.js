@@ -26,7 +26,6 @@ System.register(['angular2/core', './services/user.service', './components/user_
             AppComponent = (function () {
                 function AppComponent() {
                     this.title = 'Dojo';
-                    this.selectedView = "";
                 }
                 AppComponent.prototype.ngOnInit = function () {
                     console.log("App Started");
@@ -38,7 +37,7 @@ System.register(['angular2/core', './services/user.service', './components/user_
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <h1>{{title}}</h1>\n  <button (click)=\"onSelect('user-list')\">User List</button>\n  <button (click)=\"onSelect('create-collection')\">Create Collection</button>\n\n  <user-list *ngIf=\"selectedView=='user-list'\"></user-list>\n\n  ",
+                        template: "\n  <h1>{{title}}</h1>\n  <h2 *ngIf=\"selectedUser\">Current User : {{selectedUser.name}}</h2>\n  <button (click)=\"onSelect('user-list')\">User List</button>\n  <button (click)=\"onSelect('create-collection')\">Create Collection</button>\n\n  <user-list *ngIf=\"selectedView=='user-list'\" [(user)]=\"selectedUser\"></user-list>\n\n  ",
                         providers: [user_service_1.UserService],
                         directives: [user_list_component_1.UserListComponent]
                     }), 
