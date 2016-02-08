@@ -35,17 +35,19 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx'], function(exports_
                         .map(function (res) { return res.json(); }).share();
                 };
                 CollectionService.prototype.createCollection = function (collection) {
-                    var bodyJson = {
-                        'name': collection.name,
-                        'description': collection.description,
-                        'cover_art': collection.cover_art,
-                        'author': collection.author,
-                        'category': [],
-                        'referenceWork': []
-                    };
-                    bodyJson.category.push(collection.category);
-                    bodyJson.referenceWork.push(collection.referenceWork);
-                    var body = JSON.stringify(bodyJson);
+                    // var bodyJson = {
+                    //   'name':collection.name,
+                    //   'description':collection.description,
+                    //   'cover_art':collection.cover_art,
+                    //   'author' : collection.author,
+                    //   'category' : [],
+                    //   'referenceWork' : []
+                    // }
+                    //
+                    // bodyJson.category.push(collection.category);
+                    // bodyJson.referenceWork.push(collection.referenceWork);
+                    //
+                    var body = JSON.stringify(collection);
                     var query = this._baseUrl;
                     var headers = new http_2.Headers();
                     headers.append('Content-Type', 'application/json');

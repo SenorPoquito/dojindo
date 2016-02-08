@@ -20,20 +20,20 @@ export class CollectionService {
   }
 
   public createCollection(collection) {
-    var bodyJson = {
-      'name':collection.name,
-      'description':collection.description,
-      'cover_art':collection.cover_art,
-      'author' : collection.author,
-      'category' : [],
-      'referenceWork' : []
-    }
+    // var bodyJson = {
+    //   'name':collection.name,
+    //   'description':collection.description,
+    //   'cover_art':collection.cover_art,
+    //   'author' : collection.author,
+    //   'category' : [],
+    //   'referenceWork' : []
+    // }
+    //
+    // bodyJson.category.push(collection.category);
+    // bodyJson.referenceWork.push(collection.referenceWork);
+    //
 
-    bodyJson.category.push(collection.category);
-    bodyJson.referenceWork.push(collection.referenceWork);
-
-
-    var body = JSON.stringify(bodyJson)
+    var body = JSON.stringify(collection)
     var query = this._baseUrl;
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');

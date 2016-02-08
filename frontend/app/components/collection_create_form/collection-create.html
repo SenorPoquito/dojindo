@@ -2,11 +2,11 @@
   <form>
     <input [(ngModel)]="collection.name" name="collection-name" placeholder="Series Name" ><br>
     <input [(ngModel)]="collection.description" name="collection-description" placeholder="Series Description" ><br>
-    <select  [(ngModel)]="collection.category">
+    <select  [(ngModel)]="selectedCategories">
       <option *ngFor="#category of categories" [value]="category.id">{{category.name}}</option>
 
     </select><br>
-    <select [(ngModel)]="collection.referenceWork" ngOptions>
+    <select [(ngModel)]="selectedReferences" ngOptions>
       <option *ngFor="#reference of references" [value]="reference.name">{{reference.name}}</option>
 
     </select><br>

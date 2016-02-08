@@ -23,6 +23,9 @@ export class CollectionCreateComponent implements OnInit{
   public references:ReferenceWork[];
   public user:User;
 
+  public selectedCategories=[];
+  public selectedReferences=[];
+
   public collection:Collection = {
     id:0,
     author:"",
@@ -44,6 +47,9 @@ export class CollectionCreateComponent implements OnInit{
 
   createCollection(collection){
     collection.author=this.user.name;
+    collection.category.push(this.selectedCategories);
+    collection.referenceWork.push(this.selectedReferences);
+
     this._collectionService.createCollection(collection);
   }
   getCategories(){

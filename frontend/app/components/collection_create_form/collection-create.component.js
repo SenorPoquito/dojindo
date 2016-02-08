@@ -31,6 +31,8 @@ System.register(['angular2/core', './../../services/category.service', './../../
                     this._categoryService = _categoryService;
                     this._referenceService = _referenceService;
                     this._collectionService = _collectionService;
+                    this.selectedCategories = [];
+                    this.selectedReferences = [];
                     this.collection = {
                         id: 0,
                         author: "",
@@ -50,6 +52,8 @@ System.register(['angular2/core', './../../services/category.service', './../../
                 };
                 CollectionCreateComponent.prototype.createCollection = function (collection) {
                     collection.author = this.user.name;
+                    collection.category.push(this.selectedCategories);
+                    collection.referenceWork.push(this.selectedReferences);
                     this._collectionService.createCollection(collection);
                 };
                 CollectionCreateComponent.prototype.getCategories = function () {
