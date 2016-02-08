@@ -13,17 +13,18 @@ import {UserService} from '../../services/user.service'
     <p>Email: {{user.email}}</p>
     <p>Last Login : {{user.updated}}</p>
     <p>Created : {{user.created}}</p>
+    <button (click)="deleteUser(user)">Delete</button>
     <h3 *ngIf="user.collection_set.length>0">Series</h3>
     <ul>
       <li *ngFor='#collection of user.collection_set'>
       <div>
       <h4>{{collection.name}}</h4>
-      <ul>
+      <ol>
         <li  *ngFor='#volume of collection.volume_set'>
           <p>{{volume.name}}</p>
           <pre>{{volume.description}}</pre>
         </li>
-      </ul>
+      </ol>
       </div>
       </li>
     </ul>
@@ -49,13 +50,18 @@ export class UserListComponent{
   }
 
   getUsers(){
-    // this._userService.getUsers().then(users=>this.users = users)
     this._userService.getUsers().subscribe(
       users => this.users = users,
       error => console.error('Error' + error),
       () => console.log(this.users)
     );
   }
+
+  deleteUser(user){
+    this._userService.deleteUser(user);
+    // this.getUsers();
+  }
+
   onSelect(user:User){
     this.user = user;
     this.updateUser.next(user);

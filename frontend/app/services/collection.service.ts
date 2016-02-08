@@ -1,4 +1,4 @@
-import {User} from '../interfaces/user';
+import {Collection} from '../interfaces/collection';
 import {Injectable}     from 'angular2/core';
 import {Http} from 'angular2/http';
 import {Response} from 'angular2/http';
@@ -7,20 +7,34 @@ import {Headers} from 'angular2/http';
 import 'rxjs/Rx';
 
 @Injectable()
-export class UserService {
-  private _baseUrl = "http://localhost:8000/api/v1/";
+export class CollectionService {
+  private _baseUrl = "http://localhost:8000/api/v1/collections/";
   constructor(private _http: Http) { }
-  public getUsers() {
-    var query = this._baseUrl + 'users/';
+
+  public getCollections() {
+    var query = this._baseUrl;
     console.log('GET : ' + query);
     return this._http
       .get(query)
       .map(res => res.json()).share();
   }
 
-  public createUser(user) {
-    var body = JSON.stringify(user)
-    var query = this._baseUrl + 'users/';
+  public createCollection(collection) {
+    var bodyJson = {
+      'name':collection.name,
+      'description':collection.description,
+      'cover_art':collection.cover_art,
+      'author' : collection.author,
+      'category' : [],
+      'referenceWork' : []
+    }
+
+    bodyJson.category.push(collection.category);
+    bodyJson.referenceWork.push(collection.referenceWork);
+
+
+    var body = JSON.stringify(bodyJson)
+    var query = this._baseUrl;
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
@@ -40,9 +54,9 @@ export class UserService {
       );
   }
 
-  deleteUser(user) {
-    var username = user.name;
-    var query = this._baseUrl + 'users/' + username+'/';
+  deleteCollection(collection) {
+    var collectionId = collection.id;
+    var query = this._baseUrl + collectionId+'/';
     this._http
       .delete(query)
       .map(res => res.json())

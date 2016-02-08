@@ -31,8 +31,11 @@ System.register(['angular2/core', '../../services/user.service'], function(expor
                 };
                 UserListComponent.prototype.getUsers = function () {
                     var _this = this;
-                    // this._userService.getUsers().then(users=>this.users = users)
                     this._userService.getUsers().subscribe(function (users) { return _this.users = users; }, function (error) { return console.error('Error' + error); }, function () { return console.log(_this.users); });
+                };
+                UserListComponent.prototype.deleteUser = function (user) {
+                    this._userService.deleteUser(user);
+                    // this.getUsers();
                 };
                 UserListComponent.prototype.onSelect = function (user) {
                     this.user = user;
@@ -42,7 +45,7 @@ System.register(['angular2/core', '../../services/user.service'], function(expor
                 UserListComponent = __decorate([
                     core_1.Component({
                         selector: 'user-list',
-                        template: "\n  <div>\n  <ul>\n    <li *ngFor=\"#user of users\" (click)=\"onSelect(user)\" [class.selected]=\"user === selectedUser\">\n    <p>----{{user.name}}----</p>\n    <p>Email: {{user.email}}</p>\n    <p>Last Login : {{user.updated}}</p>\n    <p>Created : {{user.created}}</p>\n    <h3 *ngIf=\"user.collection_set.length>0\">Series</h3>\n    <ul>\n      <li *ngFor='#collection of user.collection_set'>\n      <div>\n      <h4>{{collection.name}}</h4>\n      <ul>\n        <li  *ngFor='#volume of collection.volume_set'>\n          <p>{{volume.name}}</p>\n          <pre>{{volume.description}}</pre>\n        </li>\n      </ul>\n      </div>\n      </li>\n    </ul>\n    </li>\n  </ul>\n  </div>\n  ",
+                        template: "\n  <div>\n  <ul>\n    <li *ngFor=\"#user of users\" (click)=\"onSelect(user)\" [class.selected]=\"user === selectedUser\">\n    <p>----{{user.name}}----</p>\n    <p>Email: {{user.email}}</p>\n    <p>Last Login : {{user.updated}}</p>\n    <p>Created : {{user.created}}</p>\n    <button (click)=\"deleteUser(user)\">Delete</button>\n    <h3 *ngIf=\"user.collection_set.length>0\">Series</h3>\n    <ul>\n      <li *ngFor='#collection of user.collection_set'>\n      <div>\n      <h4>{{collection.name}}</h4>\n      <ol>\n        <li  *ngFor='#volume of collection.volume_set'>\n          <p>{{volume.name}}</p>\n          <pre>{{volume.description}}</pre>\n        </li>\n      </ol>\n      </div>\n      </li>\n    </ul>\n    </li>\n  </ul>\n  </div>\n  ",
                         providers: [user_service_1.UserService],
                         inputs: ['user'],
                         outputs: ['updateUser: userChange']

@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core', './../../services/user.service'], function(exports_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9,26 +9,28 @@ System.register(['angular2/core'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, user_service_1;
     var VolumeCreateComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (user_service_1_1) {
+                user_service_1 = user_service_1_1;
             }],
         execute: function() {
-            // import {UserService} from './../../services/user.service';
             VolumeCreateComponent = (function () {
-                function VolumeCreateComponent() {
+                function VolumeCreateComponent(_userService) {
+                    this._userService = _userService;
                 }
-                // constructor (private _userService:UserService){}
                 VolumeCreateComponent.prototype.ngOnInit = function () { };
                 VolumeCreateComponent = __decorate([
                     core_1.Component({
                         selector: 'volume-create-form',
-                        templateUrl: 'app/components/volume_create_form/collection-create.html',
+                        templateUrl: 'app/components/volume_create_form/volume-create.html',
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [user_service_1.UserService])
                 ], VolumeCreateComponent);
                 return VolumeCreateComponent;
             }());
@@ -36,4 +38,4 @@ System.register(['angular2/core'], function(exports_1) {
         }
     }
 });
-//# sourceMappingURL=volume-create.component.js.map
+//# sourceMappingURL=collection-create.component.js.map

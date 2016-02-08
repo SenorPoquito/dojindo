@@ -1,0 +1,16 @@
+<div>
+  <form>
+    <input [(ngModel)]="collection.name" name="collection-name" placeholder="Series Name" ><br>
+    <input [(ngModel)]="collection.description" name="collection-description" placeholder="Series Description" ><br>
+    <select  [(ngModel)]="collection.category">
+      <option *ngFor="#category of categories" [value]="category.id">{{category.name}}</option>
+
+    </select><br>
+    <select [(ngModel)]="collection.referenceWork" ngOptions>
+      <option *ngFor="#reference of references" [value]="reference.name">{{reference.name}}</option>
+
+    </select><br>
+    <input type="file" name="collection-cover"><br>
+    <input (click)="createCollection(collection)" type="submit" value="Create Series"><br>
+  </form>
+</div>

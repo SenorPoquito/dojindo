@@ -1,4 +1,4 @@
-System.register(['angular2/core', './services/user.service', './components/user_list/user-list.component'], function(exports_1) {
+System.register(['angular2/core', './services/user.service', './components/user_list/user-list.component', './components/create-user/create-user.component', './components/collection_create_form/collection-create.component'], function(exports_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9,7 +9,7 @@ System.register(['angular2/core', './services/user.service', './components/user_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, user_service_1, user_list_component_1;
+    var core_1, user_service_1, user_list_component_1, create_user_component_1, collection_create_component_1;
     var AppComponent;
     return {
         setters:[
@@ -21,9 +21,14 @@ System.register(['angular2/core', './services/user.service', './components/user_
             },
             function (user_list_component_1_1) {
                 user_list_component_1 = user_list_component_1_1;
+            },
+            function (create_user_component_1_1) {
+                create_user_component_1 = create_user_component_1_1;
+            },
+            function (collection_create_component_1_1) {
+                collection_create_component_1 = collection_create_component_1_1;
             }],
         execute: function() {
-            // import {VolumeCreateComponent} from './components/volume_create_form/volume-create.component'
             AppComponent = (function () {
                 function AppComponent() {
                     this.title = 'Dojo';
@@ -38,9 +43,9 @@ System.register(['angular2/core', './services/user.service', './components/user_
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <h1>{{title}}</h1>\n  <h2 *ngIf=\"selectedUser\">Current User : {{selectedUser.name}}</h2>\n  <button (click)=\"onSelect('user-list')\">User List</button>\n  <button (click)=\"onSelect('create-collection')\">Create Collection</button>\n\n  <user-list *ngIf=\"selectedView=='user-list'\" [(user)]=\"selectedUser\"></user-list>\n  <volume-create-form *ngIf=\"selectedView=='create-collection'\" ></volume-create-form>\n\n\n  ",
+                        template: "\n  <h1>{{title}}</h1>\n  <h2 *ngIf=\"selectedUser\">Current User : {{selectedUser.name}}</h2>\n  <button (click)=\"onSelect('user-list')\">User List</button>\n  <button (click)=\"onSelect('new-user')\">Register User</button>\n  <button *ngIf=\"selectedUser\" (click)=\"onSelect('create-collection')\">Create Collection</button>\n\n  <user-list *ngIf=\"selectedView=='user-list'\" [(user)]=\"selectedUser\"></user-list>\n  <collection-create-form *ngIf=\"selectedView=='create-collection'\" [user]=\"selectedUser\"></collection-create-form>\n  <create-user *ngIf=\"selectedView=='new-user'\"></create-user>\n\n  ",
                         providers: [user_service_1.UserService],
-                        directives: [user_list_component_1.UserListComponent]
+                        directives: [user_list_component_1.UserListComponent, create_user_component_1.CreateUserComponent, collection_create_component_1.CollectionCreateComponent]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
