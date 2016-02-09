@@ -10,7 +10,10 @@
       <option *ngFor="#reference of references" [value]="reference.name">{{reference.name}}</option>
 
     </select><br>
-    <input type="file" name="collection-cover"><br>
+
+    <input type="file" (change)="fileChangeEvent($event)" placeholder="Select Cover Art" />
+    <img [src]="file.name" *ngIf="file" alt="Cover Art" height="42" width="42">
+    <button type="button" (click)="upload()">Upload</button>
     <input (click)="createCollection(collection)" type="submit" value="Create Series"><br>
   </form>
 </div>

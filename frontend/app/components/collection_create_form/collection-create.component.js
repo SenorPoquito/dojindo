@@ -10,7 +10,7 @@ System.register(['angular2/core', './../../services/category.service', './../../
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, category_service_1, reference_service_1, collection_service_1;
-    var CollectionCreateComponent;
+    var URL, CollectionCreateComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -26,6 +26,8 @@ System.register(['angular2/core', './../../services/category.service', './../../
                 collection_service_1 = collection_service_1_1;
             }],
         execute: function() {
+            // const URL = '/api/';
+            URL = 'localhost:8000/api/v1/fileUpload/';
             CollectionCreateComponent = (function () {
                 function CollectionCreateComponent(_categoryService, _referenceService, _collectionService) {
                     this._categoryService = _categoryService;
@@ -49,6 +51,35 @@ System.register(['angular2/core', './../../services/category.service', './../../
                 CollectionCreateComponent.prototype.ngOnInit = function () {
                     this.getCategories();
                     this.getReferences();
+                };
+                CollectionCreateComponent.prototype.upload = function () {
+                    this.makeFileRequest(URL, [], this.fileToUpload).then(function (result) {
+                        console.log(result);
+                    }, function (error) {
+                        console.error(error);
+                    });
+                };
+                CollectionCreateComponent.prototype.makeFileRequest = function (url, params, file) {
+                    return new Promise(function (resolve, reject) {
+                        var formData = new FormData();
+                        var xhr = new XMLHttpRequest();
+                        formData.append("uploads[]", file, file.name);
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4) {
+                                if (xhr.status == 200) {
+                                    resolve(JSON.parse(xhr.response));
+                                }
+                                else {
+                                    reject(xhr.response);
+                                }
+                            }
+                        };
+                        xhr.open("POST", url, true);
+                        xhr.send(formData);
+                    });
+                };
+                CollectionCreateComponent.prototype.fileChangeEvent = function (fileInput) {
+                    this.fileToUpload = fileInput.target.files;
                 };
                 CollectionCreateComponent.prototype.createCollection = function (collection) {
                     collection.author = this.user.name;

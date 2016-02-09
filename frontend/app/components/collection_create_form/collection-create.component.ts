@@ -7,6 +7,9 @@ import {CategoryService} from './../../services/category.service';
 import {ReferenceWorkService} from './../../services/reference.service';
 import {CollectionService} from './../../services/collection.service';
 
+// const URL = '/api/';
+const URL = 'localhost:8000/api/v1/fileUpload/';
+
 @Component({
   selector:'collection-create-form',
   templateUrl:'app/components/collection_create_form/collection-create.html',
@@ -15,6 +18,8 @@ import {CollectionService} from './../../services/collection.service';
 })
 
 export class CollectionCreateComponent implements OnInit{
+  fileToUpload : File;
+
   constructor (private _categoryService:CategoryService,
                private _referenceService:ReferenceWorkService,
                private _collectionService:CollectionService){}
@@ -22,7 +27,6 @@ export class CollectionCreateComponent implements OnInit{
   public categories:Category[];
   public references:ReferenceWork[];
   public user:User;
-
   public selectedCategories=[];
   public selectedReferences=[];
 
@@ -43,6 +47,38 @@ export class CollectionCreateComponent implements OnInit{
   ngOnInit() {
     this.getCategories();
     this.getReferences();
+  }
+
+  upload() {
+        this.makeFileRequest(URL, [], this.fileToUpload).then((result) => {
+            console.log(result);
+        }, (error) => {
+            console.error(error);
+        });
+    }
+
+    makeFileRequest(url: string, params: Array<string>, file: File) {
+        return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+            formData.append("uploads[]", file, file.name);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            }
+            xhr.open("POST", url, true);
+            xhr.send(formData);
+        });
+    }
+
+  fileChangeEvent(fileInput: any){
+    this.fileToUpload = fileInput.target.files;
   }
 
   createCollection(collection){
