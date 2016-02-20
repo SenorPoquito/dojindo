@@ -24,7 +24,14 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework import viewsets
 
-# Create your views here.
+#Frontend views
+def home(request):
+    return render(request, 'dojindo/home.html', {})
+def user_list(request):
+    querySet = User.objects.all()
+    return render(request, 'dojindo/user_list.html', {"users":querySet})
+
+# API VIEWS
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

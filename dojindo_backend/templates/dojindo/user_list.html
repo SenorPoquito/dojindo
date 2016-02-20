@@ -1,0 +1,9 @@
+{% extends 'dojindo/base.html' %}
+{% block content %}
+  {% for user in users %}
+    <div>
+        <h2><a href="">{{user.name}}</a></h2>
+        <p>{{user.email}}</p>
+    </div>
+  {% endfor %}
+{% endblock %}

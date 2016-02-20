@@ -42,5 +42,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # url(r'^api/v1/users/(?P<user_name>[0-9]+)/$', views.UserDetail.as_view())
     url(r'^api/v1/', include(router.urls)),
+     url(r'', include('dojindo_backend.urls')),
 ]
 # urlpatterns += router.urls
